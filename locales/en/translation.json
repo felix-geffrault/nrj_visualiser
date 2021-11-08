@@ -1,3 +1,6 @@
 {
- "invalid.credential": "Invalid credential"
+ "invalid.credential": "Invalid credential",
+ "register.email.used": "Email already used",
+ "register.email.invalid": "Email invalid",
+ "register.password.short": "Password too short"
 }

@@ -1,3 +1,6 @@
 {
-  "invalid.credential": "Identifiants invalides"
+  "invalid.credential": "Identifiants invalides",
+  "register.email.used": "Email déjà utilisé",
+  "register.email.invalid": "Email non valide",
+  "register.password.short": "Mot de passe trop court (>=6)"
 }
