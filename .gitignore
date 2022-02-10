@@ -4,5 +4,5 @@
 /.idea/
 /.github/
 /build/
-/firebase/
+/.firebase/
 /functions/.runtimeconfig.json

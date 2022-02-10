@@ -1,6 +1,12 @@
 {
- "invalid.credential": "Invalid credential",
- "register.email.used": "Email already used",
- "register.email.invalid": "Email invalid",
- "register.password.short": "Password too short"
+	"invalid.credential": "Invalid credential",
+	"register.email.used": "Email already used",
+	"register.email.invalid": "Email invalid",
+	"register.password.short": "Password too short",
+
+	"opencharge.like.connexion.required": "You must be connected to like charge point.",
+	"opencharge.chargepoint.liked": "Charging Point added to your favorites.",
+	"opencharge.chargepoint.unliked": "Charging Point removed from your favorites.",
+
+	"connexion.required.feature": "You must be connected to access this functionality"
 }

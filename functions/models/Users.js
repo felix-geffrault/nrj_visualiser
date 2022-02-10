@@ -45,7 +45,7 @@ const UserSchema = new mongoose.Schema(
         },
       ],
     },
-    {strict: false}
+    {strict: false},
 );
 
 // eslint-disable-next-line no-undef

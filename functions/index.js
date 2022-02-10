@@ -17,7 +17,7 @@ i18next
     .use(Backend)
     .use(middleware.LanguageDetector)
     .init({
-      debug: true,
+      debug: false,
       initImmediate: false,
       fallbackLng: "en",
       preload: ["en", "fr"],
@@ -36,6 +36,7 @@ mongoose
 
 const app = express();
 // Bodyparser middleware, extended false does not allow nested payloads
+app.use(middleware.handle(i18next));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
@@ -46,7 +47,7 @@ app.use(
       resave: false,
       saveUninitialized: true,
       store: MongoStore.create({mongoUrl: MONGO_URI}),
-    })
+    }),
 );
 
 // Passport middleware

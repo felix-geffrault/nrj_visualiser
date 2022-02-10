@@ -30,7 +30,7 @@ passport.use("login", new LocalStrategy({usernameField: "email"}, (email, passwo
         });
       })
       .catch((err) => done(null, false, {message: err}));
-})
+}),
 );
 
 passport.use("register", new LocalStrategy({usernameField: "email"}, (email, password, done) =>{

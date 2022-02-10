@@ -14,8 +14,9 @@ const POISchema = new mongoose.Schema(
         CountryID: Number,
       },
     },
-    {strict: false}
+    {strict: false},
 );
 
 // eslint-disable-next-line no-undef
-module.exports = POI = mongoose.model("users", POISchema);
+module.exports = POI = mongoose.model("poi", POISchema);
+
