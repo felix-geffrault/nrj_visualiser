@@ -59,4 +59,18 @@ app.post("/locales/:lng/:ns", middleware.missingKeyHandler(i18next));
 app.use("/auth", auth);
 app.use("/OpenCharge", openCharge);
 
+app.use( (req, res, next) => {
+  res.status(404);
+  const notFound = req.t("page.not.found");
+
+  // respond with json
+  if (req.accepts("json")) {
+    res.json({error: notFound});
+    return;
+  }
+
+  // default to plain-text. send()
+  res.type("txt").send(notFound);
+});
+
 exports.app = functions.https.onRequest(app);

@@ -8,5 +8,7 @@
 	"opencharge.chargepoint.liked": "Charging Point added to your favorites.",
 	"opencharge.chargepoint.unliked": "Charging Point removed from your favorites.",
 
-	"connexion.required.feature": "You must be connected to access this functionality"
+	"connexion.required.feature": "You must be connected to access this functionality",
+
+	"page.not.found": "Page not found"
 }

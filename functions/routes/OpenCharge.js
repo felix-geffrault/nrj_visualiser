@@ -67,7 +67,7 @@ router.post("/toggleLike", async (req, res, next) => {
 router.get("/liked", async (req, res, next) => {
   const user = req.user;
   if (!user) {
-    return req.status(401).json({error: req.t("connexion.required.feature")});
+    return res.status(401).json({error: req.t("connexion.required.feature")});
   }
   return res.status(200).json(await POI.find({_id: {$in: user.POILiked}}));
 });
