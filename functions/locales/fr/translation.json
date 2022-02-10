@@ -4,9 +4,10 @@
 	"register.email.invalid": "Email non valide",
 	"register.password.short": "Mot de passe trop court (>=6)",
 
-	"opencharge.like.connexion.required": "Vous devez être connecté pour aimé un point de charge.",
+	"opencharge.like.connexion.required": "Vous devez être connecté pour aimer un point de charge.",
 	"opencharge.chargepoint.liked": "Le point de charge a été ajouté à vos favoris.",
 	"opencharge.chargepoint.unliked": "Le point de charge a été retiré de vos favoris.",
+	"opencharge.like.ID.required": "L'atribut ID est nécessaire",
 
 	"connexion.required.feature": "Vous devez être connecté pour accéder à cette fonctionnalité",
 

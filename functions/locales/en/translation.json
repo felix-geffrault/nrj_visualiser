@@ -7,6 +7,7 @@
 	"opencharge.like.connexion.required": "You must be connected to like charge point.",
 	"opencharge.chargepoint.liked": "Charging Point added to your favorites.",
 	"opencharge.chargepoint.unliked": "Charging Point removed from your favorites.",
+	"opencharge.like.ID.required": "ID field is required",
 
 	"connexion.required.feature": "You must be connected to access this functionality",
 

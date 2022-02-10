@@ -34,6 +34,9 @@ router.post("/toggleLike", async (req, res, next) => {
     return res.status(401).json({error: req.t("opencharge.like.connexion.required")});
   }
   const poiSend = req.body;
+  if (!poiSend.ID) {
+    return res.status(400).json({error: req.t("opencharge.like.ID.required")});
+  }
   let poi = await POI.findOne({ID: poiSend.ID});
   if (!poi) {
     poi = new POI(poiSend);
