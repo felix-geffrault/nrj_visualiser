@@ -38,7 +38,7 @@ const UserSchema = new mongoose.Schema(
         type: Date,
         default: Date.now,
       },
-      POIliked: [
+      POILiked: [
         {
           type: mongoose.Schema.Types.ObjectId,
           ref: "POI",

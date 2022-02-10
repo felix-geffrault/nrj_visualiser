@@ -8,14 +8,25 @@ const axios = require("axios").default;
 
 const url = "https://api.openchargemap.io/v3/poi";
 const OPEN_CHARGE_API_KEY = functions.config().opencharge.key;
-router.get("/poi", (req, res, next) => {
-  console.log(req.query);
-  return axios.get(url, {
-    params: req.query,
-    headers: {"X-API-KEY": OPEN_CHARGE_API_KEY},
-  }).then((response) => res.status(200).json(response.data))
+
+router.get("/poi", async (req, res, next) => {
+  const data = await axios
+      .get(url, {
+        params: req.query,
+        headers: {"X-API-KEY": OPEN_CHARGE_API_KEY},
+      })
+      .then((response) => response.data)
       .catch((err) => res.status(500).json({error: err}));
-});
+  if (!req.user) return res.status(200).json(data);
+  const user = req.user;
+  const poiLiked = await POI.find({_id: {$in: user.POILiked}}).select("ID");
+  const poiLikedIDs = poiLiked.map((poi) => parseInt(poi.ID));
+  return res.status(200).json(data.map((poi) => {
+    poi.isLiked = poiLikedIDs.includes(poi.ID) ? true : false;
+    return poi;
+  }));
+},
+);
 
 router.post("/toggleLike", async (req, res, next) => {
   const user = req.user;
@@ -31,31 +42,33 @@ router.post("/toggleLike", async (req, res, next) => {
     });
   }
   if (!poi) return;
-  if (!user.POIliked.includes(poi._id)) {
-    user.POIliked.push(poi);
+  const userPOILikedIndex = user.POILiked.indexOf(poi._id);
+  if (userPOILikedIndex === -1) {
+    user.POILiked.push(poi);
     user.save()
-        .then(() => res.status(200).json({success: req.t("opencharge.chargepoint.liked")}))
-        .catch((err) => res.status(400).json({error: err}));
+        .then(() => {
+          res.status(200).json({success: req.t("opencharge.chargepoint.liked")});
+        })
+        .catch((err) => {
+          res.status(500).json({error: err});
+        });
   } else {
-    user.POIliked = user.POIliked.filter((prevLikedPoi) =>{
-      /* console.log(prevLikedPoi._id);
-      console.log(poi._id);
-      console.log(prevLikedPoi.ID);
-      console.log(poi.ID); */
-      return prevLikedPoi !== poi;
-    });
-    console.log(user.POIliked);
+    user.POILiked.splice(userPOILikedIndex, 1);
     user.save()
-        .then(() => res.status(200).json({success: req.t("opencharge.chargepoint.unliked")}))
-        .catch((err) => res.status(400).json({error: err}));
+        .then(() => {
+          res.status(200).json({success: req.t("opencharge.chargepoint.unliked")});
+        })
+        .catch((err) => {
+          res.status(500).json({error: err});
+        });
   }
 });
 
-router.get("liked", (req, res, next) => {
+router.get("/liked", async (req, res, next) => {
   const user = req.user;
   if (!user) {
     return req.status(401).json({error: req.t("connexion.required.feature")});
   }
-  return res.status(200).json(user.POIliked);
+  return res.status(200).json(await POI.find({_id: {$in: user.POILiked}}));
 });
 module.exports = router;

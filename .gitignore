@@ -6,3 +6,4 @@
 /build/
 /.firebase/
 /functions/.runtimeconfig.json
+node_modules/
