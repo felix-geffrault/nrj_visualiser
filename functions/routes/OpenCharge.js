@@ -40,11 +40,27 @@ router.post("/toggleLike", async (req, res, next) => {
   let poi = await POI.findOne({ID: poiSend.ID});
   if (!poi) {
     poi = new POI(poiSend);
-    await poi.save().then(() => console.log("POI saved")).catch((err) => {
+    await poi.save().catch((err) => {
       res.status(500).json({error: err}); // "Error during contact with database."
     });
   }
-  if (!poi) return;
+  if (!poi) {
+    return;
+  } else {
+    if (poiSend.DateLastStatusUpdate) {
+      if (poi.DateLastStatusUpdate) {
+        const lastUpdatedDateSended = Date.parse(poiSend.DateLastStatusUpdate);
+        const lastUpdatedDateInMemory = Date.parse(poi.DateLastStatusUpdate);
+        if (lastUpdatedDateSended > lastUpdatedDateInMemory) {
+          poi.overwrite(poiSend);
+          await poi.save();
+        }
+      } else {
+        poi.overwrite(poiSend);
+        await poi.save();
+      }
+    }
+  }
   const userPOILikedIndex = user.POILiked.indexOf(poi._id);
   if (userPOILikedIndex === -1) {
     user.POILiked.push(poi);

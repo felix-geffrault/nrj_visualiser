@@ -3,9 +3,10 @@ const mongoose = require("mongoose");
 // Create Schema
 const POISchema = new mongoose.Schema(
     {
-      ID: String,
+      ID: Number,
       AddressInfo: {
         description: String,
+        ID: Number,
         AddressLine1: String,
         AddressLine2: String,
         Town: String,
