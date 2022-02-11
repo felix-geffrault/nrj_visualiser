@@ -10,6 +10,12 @@ const POISchema = new mongoose.Schema(
         AddressLine1: String,
         AddressLine2: String,
         Town: String,
+        Country: {
+          ISOCode: String,
+          ContinentCode: String,
+          ID: Number,
+          Title: String,
+        },
         StateOrProvince: String,
         Postcode: String,
         CountryID: Number,
